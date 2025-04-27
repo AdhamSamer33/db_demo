@@ -13,6 +13,7 @@ part 'home_bloc.freezed.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeState()) {
     on<_FetchProducts>(_onFetched);
+    on<_DeleteProduct>(_onDelete);
   }
 
   Future<void> _onFetched(_FetchProducts event, Emitter<HomeState> emit) async {
@@ -22,5 +23,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     print("Products: $products");
     emit(HomeLoaded(products ?? []));
     // }
+  }
+
+  Future<void> _onDelete(_DeleteProduct event, Emitter<HomeState> emit) async {
+    await LocalDataStorage.delete(event.product.id.toString());
+    add(HomeEvent.fetchProducts());
   }
 }

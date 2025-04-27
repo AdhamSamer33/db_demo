@@ -21,32 +21,38 @@ mixin _$HomeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() test,
     required TResult Function() fetchProducts,
+    required TResult Function(ProductEntity product) deleteProduct,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? test,
     TResult? Function()? fetchProducts,
+    TResult? Function(ProductEntity product)? deleteProduct,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? test,
     TResult Function()? fetchProducts,
+    TResult Function(ProductEntity product)? deleteProduct,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_test value) test,
     required TResult Function(_FetchProducts value) fetchProducts,
+    required TResult Function(_DeleteProduct value) deleteProduct,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_test value)? test,
     TResult? Function(_FetchProducts value)? fetchProducts,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_test value)? test,
     TResult Function(_FetchProducts value)? fetchProducts,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -114,6 +120,7 @@ class _$testImpl implements _test {
   TResult when<TResult extends Object?>({
     required TResult Function() test,
     required TResult Function() fetchProducts,
+    required TResult Function(ProductEntity product) deleteProduct,
   }) {
     return test();
   }
@@ -123,6 +130,7 @@ class _$testImpl implements _test {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? test,
     TResult? Function()? fetchProducts,
+    TResult? Function(ProductEntity product)? deleteProduct,
   }) {
     return test?.call();
   }
@@ -132,6 +140,7 @@ class _$testImpl implements _test {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? test,
     TResult Function()? fetchProducts,
+    TResult Function(ProductEntity product)? deleteProduct,
     required TResult orElse(),
   }) {
     if (test != null) {
@@ -145,6 +154,7 @@ class _$testImpl implements _test {
   TResult map<TResult extends Object?>({
     required TResult Function(_test value) test,
     required TResult Function(_FetchProducts value) fetchProducts,
+    required TResult Function(_DeleteProduct value) deleteProduct,
   }) {
     return test(this);
   }
@@ -154,6 +164,7 @@ class _$testImpl implements _test {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_test value)? test,
     TResult? Function(_FetchProducts value)? fetchProducts,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
   }) {
     return test?.call(this);
   }
@@ -163,6 +174,7 @@ class _$testImpl implements _test {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_test value)? test,
     TResult Function(_FetchProducts value)? fetchProducts,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     required TResult orElse(),
   }) {
     if (test != null) {
@@ -221,6 +233,7 @@ class _$FetchProductsImpl implements _FetchProducts {
   TResult when<TResult extends Object?>({
     required TResult Function() test,
     required TResult Function() fetchProducts,
+    required TResult Function(ProductEntity product) deleteProduct,
   }) {
     return fetchProducts();
   }
@@ -230,6 +243,7 @@ class _$FetchProductsImpl implements _FetchProducts {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? test,
     TResult? Function()? fetchProducts,
+    TResult? Function(ProductEntity product)? deleteProduct,
   }) {
     return fetchProducts?.call();
   }
@@ -239,6 +253,7 @@ class _$FetchProductsImpl implements _FetchProducts {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? test,
     TResult Function()? fetchProducts,
+    TResult Function(ProductEntity product)? deleteProduct,
     required TResult orElse(),
   }) {
     if (fetchProducts != null) {
@@ -252,6 +267,7 @@ class _$FetchProductsImpl implements _FetchProducts {
   TResult map<TResult extends Object?>({
     required TResult Function(_test value) test,
     required TResult Function(_FetchProducts value) fetchProducts,
+    required TResult Function(_DeleteProduct value) deleteProduct,
   }) {
     return fetchProducts(this);
   }
@@ -261,6 +277,7 @@ class _$FetchProductsImpl implements _FetchProducts {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_test value)? test,
     TResult? Function(_FetchProducts value)? fetchProducts,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
   }) {
     return fetchProducts?.call(this);
   }
@@ -270,6 +287,7 @@ class _$FetchProductsImpl implements _FetchProducts {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_test value)? test,
     TResult Function(_FetchProducts value)? fetchProducts,
+    TResult Function(_DeleteProduct value)? deleteProduct,
     required TResult orElse(),
   }) {
     if (fetchProducts != null) {
@@ -281,6 +299,154 @@ class _$FetchProductsImpl implements _FetchProducts {
 
 abstract class _FetchProducts implements HomeEvent {
   factory _FetchProducts() = _$FetchProductsImpl;
+}
+
+/// @nodoc
+abstract class _$$DeleteProductImplCopyWith<$Res> {
+  factory _$$DeleteProductImplCopyWith(
+    _$DeleteProductImpl value,
+    $Res Function(_$DeleteProductImpl) then,
+  ) = __$$DeleteProductImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ProductEntity product});
+}
+
+/// @nodoc
+class __$$DeleteProductImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$DeleteProductImpl>
+    implements _$$DeleteProductImplCopyWith<$Res> {
+  __$$DeleteProductImplCopyWithImpl(
+    _$DeleteProductImpl _value,
+    $Res Function(_$DeleteProductImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? product = null}) {
+    return _then(
+      _$DeleteProductImpl(
+        null == product
+            ? _value.product
+            : product // ignore: cast_nullable_to_non_nullable
+                as ProductEntity,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$DeleteProductImpl implements _DeleteProduct {
+  _$DeleteProductImpl(this.product);
+
+  @override
+  final ProductEntity product;
+
+  @override
+  String toString() {
+    return 'HomeEvent.deleteProduct(product: $product)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteProductImpl &&
+            (identical(other.product, product) || other.product == product));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, product);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteProductImplCopyWith<_$DeleteProductImpl> get copyWith =>
+      __$$DeleteProductImplCopyWithImpl<_$DeleteProductImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() test,
+    required TResult Function() fetchProducts,
+    required TResult Function(ProductEntity product) deleteProduct,
+  }) {
+    return deleteProduct(product);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? test,
+    TResult? Function()? fetchProducts,
+    TResult? Function(ProductEntity product)? deleteProduct,
+  }) {
+    return deleteProduct?.call(product);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? test,
+    TResult Function()? fetchProducts,
+    TResult Function(ProductEntity product)? deleteProduct,
+    required TResult orElse(),
+  }) {
+    if (deleteProduct != null) {
+      return deleteProduct(product);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_test value) test,
+    required TResult Function(_FetchProducts value) fetchProducts,
+    required TResult Function(_DeleteProduct value) deleteProduct,
+  }) {
+    return deleteProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_test value)? test,
+    TResult? Function(_FetchProducts value)? fetchProducts,
+    TResult? Function(_DeleteProduct value)? deleteProduct,
+  }) {
+    return deleteProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_test value)? test,
+    TResult Function(_FetchProducts value)? fetchProducts,
+    TResult Function(_DeleteProduct value)? deleteProduct,
+    required TResult orElse(),
+  }) {
+    if (deleteProduct != null) {
+      return deleteProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteProduct implements HomeEvent {
+  factory _DeleteProduct(final ProductEntity product) = _$DeleteProductImpl;
+
+  ProductEntity get product;
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteProductImplCopyWith<_$DeleteProductImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
