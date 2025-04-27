@@ -5,14 +5,47 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:db_demo/features/home/presentation/manager/home_bloc/home_bloc.dart';
 import 'package:db_demo/features/product/presentation/pages/product_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key}) {
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
     homeBloc.add(HomeEvent.fetchProducts());
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      print("resumeeeddd");
+      homeBloc.add(HomeEvent.fetchProducts());
+    }
+  }
+
+  Future<void> _onRefresh() async {
+    homeBloc.add(HomeEvent.fetchProducts());
+  }
+
+  @override
+  bool get wantKeepAlive => true;
   final HomeBloc homeBloc = HomeBloc();
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text('Home'),
@@ -27,21 +60,40 @@ class HomeScreen extends StatelessWidget {
           },
         ),
       ),
-      child: BlocConsumer<HomeBloc, HomeState>(
-        bloc: homeBloc,
-        builder: (context, state) {
-          List<ProductEntity> products = [];
-          if (state is HomeLoaded) {
-            products = state.products;
-          }
-          return ListView.builder(
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return Text(products[index].name);
+      child: SafeArea(
+        child: RefreshIndicator(
+          onRefresh: _onRefresh,
+          child: BlocConsumer<HomeBloc, HomeState>(
+            bloc: homeBloc,
+            builder: (context, state) {
+              List<ProductEntity> products = [];
+              if (state is HomeLoaded) {
+                products = state.products;
+              }
+              return ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return _buildProductItem(products[index]);
+                },
+              );
             },
-          );
+            listener: (BuildContext context, HomeState state) {},
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProductItem(ProductEntity product) {
+    return CupertinoListTile(
+      title: Text(product.name),
+      subtitle: Text(product.description),
+      additionalInfo: Text(product.price.toString()),
+      trailing: GestureDetector(
+        child: Icon(CupertinoIcons.delete),
+        onTap: () {
+          homeBloc.add(HomeEvent.deleteProduct(product));
         },
-        listener: (BuildContext context, HomeState state) {},
       ),
     );
   }
