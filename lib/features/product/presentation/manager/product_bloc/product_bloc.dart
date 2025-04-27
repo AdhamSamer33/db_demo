@@ -1,5 +1,3 @@
-import 'package:db_demo/app_constants.dart';
-import 'package:db_demo/local_data_storage/local_data_storage.dart';
 import 'package:db_demo/local_data_storage/products_data_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,6 +11,7 @@ part 'product_bloc.freezed.dart';
 
 @Injectable()
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
+  final ProductsDataStorage _localDataStorage = ProductsDataStorage();
   ProductBloc() : super(ProductState()) {
     on<_test>((event, emit) => emit(state.copyWith(isLoading: true)));
     on<_addProduct>(_add);
@@ -25,7 +24,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   }
 
   Future<void> _add(_addProduct event, Emitter<ProductState> emit) async {
-    await ProductsDataStorage().put(event.product.id.toString(), event.product);
+    await _localDataStorage.put(event.product.id.toString(), event.product);
     emit(state.copyWith(product: event.product));
   }
 }

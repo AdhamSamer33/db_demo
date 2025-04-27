@@ -5,10 +5,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final HomeBloc homeBloc = HomeBloc();
 
-  HomeScreen({super.key}) {
+  @override
+  void initState() {
+    super.initState();
     homeBloc.add(HomeEvent.fetchProducts());
   }
 

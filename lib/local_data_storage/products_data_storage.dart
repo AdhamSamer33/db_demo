@@ -11,6 +11,11 @@ class ProductsDataStorage implements LocalDataStorage<ProductEntity> {
   );
 
   @override
+  Future<void> init() async {
+    box = await Hive.openBox<ProductEntity>(AppConstants.productsBoxKey);
+  }
+
+  @override
   Future<void> clear() async {
     await box.clear();
   }
@@ -38,11 +43,6 @@ class ProductsDataStorage implements LocalDataStorage<ProductEntity> {
   @override
   List<ProductEntity> getAllValues() {
     return box.values.toList();
-  }
-
-  @override
-  Future<void> init() async {
-    box = await Hive.openBox<ProductEntity>(AppConstants.productsBoxKey);
   }
 
   @override
