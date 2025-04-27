@@ -1,4 +1,3 @@
-import 'package:db_demo/app_constants.dart';
 import 'package:db_demo/features/product/domain/entities/product_item_entity.dart';
 import 'package:db_demo/local_data_storage/local_data_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,14 +5,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 part 'home_event.dart';
+
 part 'home_state.dart';
+
 part 'home_bloc.freezed.dart';
 
 @Injectable()
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeState()) {
     on<_FetchProducts>(_onFetched);
-    on<_DeleteProduct>(_onDelete);
   }
 
   Future<void> _onFetched(_FetchProducts event, Emitter<HomeState> emit) async {
@@ -21,12 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     // if (data.isNotEmpty) {
     final products = data.map((e) => e as ProductEntity).toList();
     print("Products: $products");
-    emit(HomeLoaded(products ?? []));
+    emit(HomeLoaded(products));
     // }
-  }
-
-  Future<void> _onDelete(_DeleteProduct event, Emitter<HomeState> emit) async {
-    await LocalDataStorage.delete(event.product.id.toString());
-    add(HomeEvent.fetchProducts());
   }
 }
