@@ -1,15 +1,16 @@
-import 'package:db_demo/features/product/domain/entities/product_item_entity.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:db_demo/features/home/presentation/manager/home_bloc/home_bloc.dart';
+import 'package:db_demo/features/product/domain/entities/product_item_entity.dart';
 import 'package:db_demo/features/product/presentation/pages/product_screen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
+  final HomeBloc homeBloc = HomeBloc();
+
   HomeScreen({super.key}) {
     homeBloc.add(HomeEvent.fetchProducts());
   }
-  final HomeBloc homeBloc = HomeBloc();
 
   @override
   Widget build(BuildContext context) {

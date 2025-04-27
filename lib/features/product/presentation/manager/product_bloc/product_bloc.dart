@@ -1,5 +1,6 @@
 import 'package:db_demo/app_constants.dart';
 import 'package:db_demo/local_data_storage/local_data_storage.dart';
+import 'package:db_demo/local_data_storage/products_data_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -24,7 +25,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   }
 
   Future<void> _add(_addProduct event, Emitter<ProductState> emit) async {
-    await LocalDataStorage.put(event.product.id.toString(), event.product);
+    await ProductsDataStorage().put(event.product.id.toString(), event.product);
     emit(state.copyWith(product: event.product));
   }
 }
