@@ -1,4 +1,5 @@
 import 'package:db_demo/features/product/domain/entities/product_item_entity.dart';
+import 'package:db_demo/utils/ObseerverUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,26 +14,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>
-    with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
+    with AutomaticKeepAliveClientMixin, RouteAware {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    homeBloc.add(HomeEvent.fetchProducts());
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ObserverUtils.routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+  @override
+  void didPopNext() {
+    print("ressumeddd");
     homeBloc.add(HomeEvent.fetchProducts());
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    ObserverUtils.routeObserver.unsubscribe(this);
     super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      print("resumeeeddd");
-      homeBloc.add(HomeEvent.fetchProducts());
-    }
   }
 
   Future<void> _onRefresh() async {
