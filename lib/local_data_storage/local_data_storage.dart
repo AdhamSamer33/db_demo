@@ -1,17 +1,10 @@
+import 'package:hive_ce/hive.dart';
+
 abstract class LocalDataStorage<T> {
-  Future<void> initBox();
-
-  Future<void> close();
-
-  Future<void> clear();
-
+  Future<void> add(String key, T value);
+  Future<T?> get(String key);
+  Future<List<T>> getAll();
+  Future<void> update(String key, T value);
   Future<void> delete(String key);
-
-  Future<void> put(String key, T value);
-
-  T? get(String key);
-
-  Future<void> deleteAll(List<String> keys);
-
-  List<T> getAllValues();
+  Future<void> clear();
 }

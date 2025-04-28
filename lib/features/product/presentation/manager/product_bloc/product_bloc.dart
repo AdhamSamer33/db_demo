@@ -21,7 +21,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   }
 
   Future<void> _add(_addProduct event, Emitter<ProductState> emit) async {
-    await _localDataStorage.put(event.product.id.toString(), event.product);
+    await _localDataStorage.update(event.product.id.toString(), event.product);
     emit(state.copyWith(product: event.product));
   }
 
@@ -36,6 +36,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     _updateProduct event,
     Emitter<ProductState> emit,
   ) async {
-    await _localDataStorage.put(event.product.id.toString(), event.product);
+    await _localDataStorage.update(event.product.id.toString(), event.product);
   }
 }

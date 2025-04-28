@@ -18,7 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _onFetched(_FetchProducts event, Emitter<HomeState> emit) async {
-    final products = _localDataStorage.getAllValues();
+    final products = await _localDataStorage.getAll();
     emit(HomeLoaded(products));
   }
 }
