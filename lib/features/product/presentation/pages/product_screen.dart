@@ -1,15 +1,21 @@
 import 'dart:math';
 
 import 'package:db_demo/features/product/domain/entities/product_item_entity.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:db_demo/features/product/presentation/manager/product_bloc/product_bloc.dart';
 
-class ProductScreen extends StatelessWidget {
-  ProductScreen({super.key});
+class ProductScreen extends StatefulWidget {
+  const ProductScreen({super.key});
+
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
   final ProductBloc _productBloc = ProductBloc();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProductBloc, ProductState>(
