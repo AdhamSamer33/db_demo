@@ -11,7 +11,7 @@ class ProductsDataStorage implements LocalDataStorage<ProductEntity> {
   );
 
   @override
-  Future<void> init() async {
+  Future<void> initBox() async {
     box = await Hive.openBox<ProductEntity>(AppConstants.productsBoxKey);
   }
 

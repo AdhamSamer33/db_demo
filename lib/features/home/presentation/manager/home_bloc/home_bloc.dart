@@ -5,7 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 part 'home_event.dart';
+
 part 'home_state.dart';
+
 part 'home_bloc.freezed.dart';
 
 @Injectable()

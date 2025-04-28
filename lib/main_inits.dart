@@ -10,6 +10,6 @@ final class MainInits {
   static Future<void> _initHive() async {
     await Hive.initFlutter();
     Hive.registerAdapters();
-    await ProductsDataStorage().init();
+    await ProductsDataStorage().initBox();
   }
 }

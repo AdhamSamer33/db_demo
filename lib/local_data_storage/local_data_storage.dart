@@ -1,5 +1,5 @@
 abstract class LocalDataStorage<T> {
-  Future<void> init();
+  Future<void> initBox();
 
   Future<void> close();
 
